@@ -1,0 +1,56 @@
+plugins {
+    alias(libs.plugins.jetbrains.kotlin.android)
+}
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 34
+
+
+    defaultConfig {
+        namespace "com.vignesh.nfccardreader"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 6
+        versionName "1.4.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+        buildConfigField "boolean", 'LOG_DEBUG_MODE', 'false'
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", 'LOG_DEBUG_MODE', 'true'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", 'LOG_DEBUG_MODE', 'false'
+        }
+    }
+    buildFeatures {
+
+        buildConfig true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-lang3:3.6'
+    implementation libs.androidx.core.ktx
+
+}
